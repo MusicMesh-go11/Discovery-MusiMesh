@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package invitation;
+
+option go_package = "generate/invitation";
+
+service InvitationService {
+  rpc Create (Invitation) returns (Void);
+  rpc GetById(InvitationID) returns (InvitationRes);
+  rpc Delete (InvitationID) returns (Void);
+}
+
+message Void {}
+
+message InvitationRes {
+  string id = 1;
+  string composition_id = 2;
+  string inviter_id = 3;
+  string invitee_id = 4;
+  InvitationStatus status = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  int64 deleted_at = 8;
+}
+
+enum InvitationStatus {
+  PENDING = 0;
+  ACCEPTED = 1;
+  DECLINED = 2;
+}
+
+message Invitation {
+  string composition_id = 1;
+  string inviter_id = 2;
+  string invitee_id = 3;
+  InvitationStatus status = 4;
+}
+
+message InvitationID {
+  string id = 1;
+}

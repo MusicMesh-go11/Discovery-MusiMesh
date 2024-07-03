@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package userInteractions;
+
+option go_package = "generate/user_interactions";
+
+service UserInteractionsService {
+  rpc Create(UserInteraction) returns (Void);
+  rpc Get(Void) returns(UserInteractionSRes);
+  rpc GetById(UserInteractionId) returns (UserInteractionRes);
+  rpc Update(UserInteractionRes) returns (Void);
+  rpc Delete (UserInteractionId) returns (Void);
+}
+
+message Void{}
+
+message UserInteraction{
+  string userId = 1;
+  string compositionId = 2;
+  string interactionType = 3;
+}
+
+message UserInteractionRes {
+  string id = 1;
+  string userId = 2;
+  string compositionId = 3;
+  string interactionType = 4;
+  string createdAt = 5;
+  string UpdatedAt = 6;
+}
+
+message UserInteractionSRes{
+  repeated UserInteractionRes userInteraction = 1;
+}
+
+message UserInteractionId{
+  string userInteractionId = 1;
+}

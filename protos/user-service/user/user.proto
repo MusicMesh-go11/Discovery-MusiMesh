@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "generate/user";
+
+service UserService {
+  rpc Create(User) returns (Void);
+  rpc Get(FilterRequest) returns (UsersRes);
+  rpc GetByID(UserId) returns (UserRes);
+  rpc Update(UserRes) returns (Void);
+  rpc Delete(UserId) returns (Void);
+}
+
+message Void{}
+
+message UserRes{
+  string userID = 1;
+  string userName = 2;
+  string email = 3;
+  string password = 4;
+  string createdAt = 5;
+}
+
+message UsersRes {
+  repeated UserRes users = 1;
+}
+
+message User{
+  string userName = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message FilterRequest{
+  string query = 1;
+  repeated string arr = 2;
+}
+
+message UserId {
+  string id = 1;
+}

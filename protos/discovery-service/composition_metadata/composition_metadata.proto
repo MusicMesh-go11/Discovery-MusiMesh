@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package compositionMetadata;
+
+option go_package = "generate/composition_metadata";
+
+service CompositionMetadataService {
+  rpc Create(CompositionMetadata) returns (Void);
+  rpc GetTrending (Void) returns (CompositionsRes);
+  rpc GetRecommended (Void) returns (CompositionsRes);
+  rpc GetByGenre (GenreRequest) returns (CompositionsRes);
+  rpc Update(CompositionRes) returns (Void);
+  rpc Delete(CompositionMetadataId) returns (Void);
+}
+
+message Void {}
+
+message CompositionMetadataId {
+  string metadataId = 1;
+}
+
+message GenreRequest {
+  string genre = 1;
+}
+
+message CompositionMetadata{
+  string genre = 1;
+  string tags = 2;
+}
+
+message CompositionsRes{
+    repeated CompositionRes compositions = 1;
+}
+
+message CompositionRes{
+  string composition_id = 1;
+  string genre = 2;
+  string tags = 3;
+  int64 listen_count = 4;
+  int64 like_count = 5;
+}

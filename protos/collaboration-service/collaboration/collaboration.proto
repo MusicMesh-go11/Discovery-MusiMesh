@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package collaboration;
+
+option go_package = "generate/collaboration";
+
+service CollaborationService {
+  rpc Create (Collaboration) returns (Void);
+  rpc GetById(CollaborationID) returns (CollaborationRes);
+  rpc GetByCompositionId (CompositionID) returns (CollaborationRes);
+  rpc Delete (CollaborationID) returns (Void);
+}
+
+message Void {}
+
+message CollaborationID{
+  string CollaborationID = 1;
+}
+
+message Collaboration {
+  string composition_id = 2;
+  string user_id = 3;
+  CollaborationRole role = 4;
+  string joined_at = 5;
+}
+
+enum CollaborationRole {
+  OWNER = 0;
+  COLLABORATOR = 1;
+  VIEWER = 2;
+}
+
+message CompositionID {
+  string compositionId = 1;
+}
+
+message CollaborationRes {
+  string id = 1;
+  string compositionId = 2;
+  string inviter_id = 3;
+  string invitee_id = 4;
+  string createdAt = 5;
+  string updatedAt = 6;
+}
