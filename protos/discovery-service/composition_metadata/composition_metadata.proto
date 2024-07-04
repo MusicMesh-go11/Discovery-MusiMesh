@@ -15,17 +15,18 @@ service CompositionMetadataService {
 
 message Void {}
 
+message CompositionMetadata{
+  string composition_id = 1;
+  string genre = 2;
+  string tags = 3;
+}
+
 message CompositionMetadataId {
   string metadataId = 1;
 }
 
 message GenreRequest {
   string genre = 1;
-}
-
-message CompositionMetadata{
-  string genre = 1;
-  string tags = 2;
 }
 
 message CompositionsRes{
