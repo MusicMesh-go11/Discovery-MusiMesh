@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type CompositionMetadataServiceClient interface {
 	Create(ctx context.Context, in *CompositionMetadata, opts ...grpc.CallOption) (*Void, error)
 	GetTrending(ctx context.Context, in *Void, opts ...grpc.CallOption) (*CompositionsRes, error)
-	GetRecommended(ctx context.Context, in *Void, opts ...grpc.CallOption) (*CompositionsRes, error)
+	GetRecommended(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*CompositionsRes, error)
 	GetByGenre(ctx context.Context, in *GenreRequest, opts ...grpc.CallOption) (*CompositionsRes, error)
 	Update(ctx context.Context, in *CompositionRes, opts ...grpc.CallOption) (*Void, error)
 	Delete(ctx context.Context, in *CompositionMetadataId, opts ...grpc.CallOption) (*Void, error)
@@ -56,7 +56,7 @@ func (c *compositionMetadataServiceClient) GetTrending(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *compositionMetadataServiceClient) GetRecommended(ctx context.Context, in *Void, opts ...grpc.CallOption) (*CompositionsRes, error) {
+func (c *compositionMetadataServiceClient) GetRecommended(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*CompositionsRes, error) {
 	out := new(CompositionsRes)
 	err := c.cc.Invoke(ctx, "/compositionMetadata.CompositionMetadataService/GetRecommended", in, out, opts...)
 	if err != nil {
@@ -98,7 +98,7 @@ func (c *compositionMetadataServiceClient) Delete(ctx context.Context, in *Compo
 type CompositionMetadataServiceServer interface {
 	Create(context.Context, *CompositionMetadata) (*Void, error)
 	GetTrending(context.Context, *Void) (*CompositionsRes, error)
-	GetRecommended(context.Context, *Void) (*CompositionsRes, error)
+	GetRecommended(context.Context, *UserId) (*CompositionsRes, error)
 	GetByGenre(context.Context, *GenreRequest) (*CompositionsRes, error)
 	Update(context.Context, *CompositionRes) (*Void, error)
 	Delete(context.Context, *CompositionMetadataId) (*Void, error)
@@ -115,7 +115,7 @@ func (UnimplementedCompositionMetadataServiceServer) Create(context.Context, *Co
 func (UnimplementedCompositionMetadataServiceServer) GetTrending(context.Context, *Void) (*CompositionsRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTrending not implemented")
 }
-func (UnimplementedCompositionMetadataServiceServer) GetRecommended(context.Context, *Void) (*CompositionsRes, error) {
+func (UnimplementedCompositionMetadataServiceServer) GetRecommended(context.Context, *UserId) (*CompositionsRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommended not implemented")
 }
 func (UnimplementedCompositionMetadataServiceServer) GetByGenre(context.Context, *GenreRequest) (*CompositionsRes, error) {
@@ -178,7 +178,7 @@ func _CompositionMetadataService_GetTrending_Handler(srv interface{}, ctx contex
 }
 
 func _CompositionMetadataService_GetRecommended_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Void)
+	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -190,7 +190,7 @@ func _CompositionMetadataService_GetRecommended_Handler(srv interface{}, ctx con
 		FullMethod: "/compositionMetadata.CompositionMetadataService/GetRecommended",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CompositionMetadataServiceServer).GetRecommended(ctx, req.(*Void))
+		return srv.(CompositionMetadataServiceServer).GetRecommended(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -21,3 +21,7 @@ func (m *CMetadata) Create(ctx context.Context, in *pb.CompositionMetadata, opts
 		in.CompositionId, in.Genre, in.Tags)
 	return &pb.Void{}, err
 }
+
+func (m *CMetadata) GetTrending(ctx context.Context, in *pb.Void) (*pb.CompositionsRes, error) {
+
+}
