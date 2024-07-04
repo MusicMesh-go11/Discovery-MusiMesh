@@ -1,11 +1,17 @@
 package cMetadata
 
-import "database/sql"
+import (
+	"MusicMesh/Discovery-MusicMesh/generate/composition"
+	"database/sql"
+	"google.golang.org/grpc"
+)
 
 type CMetadata struct {
-	DB *sql.DB
+	Composition composition.CompositionServiceClient
+	DB          *sql.DB
 }
 
-func NewCMetadata(db *sql.DB) *CMetadata {
-	return &CMetadata{DB: db}
+func NewCMetadata(db *sql.DB, conn *grpc.ClientConn) *CMetadata {
+	Client := composition.NewCompositionServiceClient(conn)
+	return &CMetadata{DB: db, Composition: Client}
 }
