@@ -7,13 +7,17 @@ option go_package = "generate/composition_metadata";
 service CompositionMetadataService {
   rpc Create(CompositionMetadata) returns (Void);
   rpc GetTrending (Void) returns (CompositionsRes);
-  rpc GetRecommended (Void) returns (CompositionsRes);
+  rpc GetRecommended (UserId) returns (CompositionsRes);
   rpc GetByGenre (GenreRequest) returns (CompositionsRes);
   rpc Update(CompositionRes) returns (Void);
   rpc Delete(CompositionMetadataId) returns (Void);
 }
 
 message Void {}
+
+message UserId{
+  string userId = 1;
+}
 
 message CompositionMetadata{
   string composition_id = 1;
