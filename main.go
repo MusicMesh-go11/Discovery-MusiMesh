@@ -23,7 +23,7 @@ func main() {
 	}
 	defer CompositionConn.Close()
 
-	db, err := postgres.Connect()
+	db, err := postgres.Conn()
 	if err != nil {
 		panic(err)
 	}

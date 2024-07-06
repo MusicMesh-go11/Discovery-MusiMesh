@@ -1,12 +1,13 @@
 CREATE TYPE genre AS ENUM ('rock', 'pop', 'jazz', 'classical', 'electronic', 'hip_hop', 'other');
 
 CREATE TABLE composition_metadata (
-                                      composition_id uuid NOT NULL ,
+                                      composition_id UUID NOT NULL,
                                       genre genre,
-                                      tags TEXT[],
+                                      tags varchar,
                                       listen_count INTEGER DEFAULT 0,
                                       like_count INTEGER DEFAULT 0
 );
+
 
 CREATE TABLE user_interactions (
                                    id uuid default gen_random_uuid() PRIMARY KEY,
